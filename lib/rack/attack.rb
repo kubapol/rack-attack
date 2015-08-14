@@ -83,7 +83,7 @@ class Rack::Attack
   @blacklisted_response = lambda {|env| [403, {'Content-Type' => 'text/plain'}, ["Forbidden\n"]] }
   @throttled_response   = lambda {|env|
     retry_after = (env['rack.attack.match_data'] || {})[:period]
-    [429, {'Content-Type' => 'text/plain', 'Retry-After' => retry_after.to_s}, ["Retry later\n"]]
+    [429, {'Content-Type' => 'text/plain', 'Retry-After' => retry_after.to_s}, ["You have reached the amount of limit SMSes!\n"]]
   }
 
   def initialize(app)
